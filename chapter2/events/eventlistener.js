@@ -1,4 +1,5 @@
-const net = require('net')
+//modified from original by firing event once after user types
+const net = require('net');
 
 const EventEmitter = require('events').EventEmitter;
 const channel = new EventEmitter();
