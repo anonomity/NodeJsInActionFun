@@ -6,12 +6,14 @@ channel.subscriptions = {};
 channel.on('join', function(id, client) {
 	const welcome = `
 		Welcome!
-		Guests online: ${this.listeners('broadcast').length}
+		Guests online: ${this.listeners('broadcast').length + 1}
 	`;
 	client.write(`${welcome}\n`)
 	this.clients[id] =client;
 	this.subscriptions[id] = (senderId, message) => {
 		if (id != senderId) {
+			const mess = `${senderId} wrote: `
+			this.clients[id].write(mess)
 			this.clients[id].write(message);
 		}
 	};
@@ -29,7 +31,7 @@ channel.on('leave', function(id){
 	channel.emit('broadcast', id, `${id} has left the chatroom. \n`);
 });
 const server = net.createServer(client => {
-	const id = `${client.remoteAdress}:${client.remotePort}`;
+	const id = `${client.remoteAddress}:${client.remotePort}`;
 	channel.emit('join', id, client);
 	client.on('data', data => {
 		data = data.toString();
