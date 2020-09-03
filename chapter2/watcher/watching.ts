@@ -1,15 +1,14 @@
-const Watcher = require('./watcher.ts');
-const fs = require('fs');
-
+import fs from 'fs';
+import Watcher from './watcher';
 const watchDir = './test'
 const processedDir = './testlocation'
 
 const watcher = new Watcher(watchDir, processedDir);
 
-watcher.on('process', (file) => {
+watcher.on('process', (file: string) => {
 	const watchFile = `${watchDir}/${file}`;
 	const processedFile = `${processedDir}/${file.toLowerCase()}`;
-	fs.rename(watchFile, processedFile, err => {
+	fs.rename(watchFile, processedFile, (err: any) => {
 		if (err) throw err;
 	});
 });
