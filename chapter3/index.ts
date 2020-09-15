@@ -1,8 +1,8 @@
 import express from 'express'
 const app = express();
-const articles = [{title: 'Example'}];
+const articles = [{title: 'Example'},{title: 'drugi'}];
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
 app.get('/articles', (req: express.Request, res: express.Response) => {
     res.send(articles)
