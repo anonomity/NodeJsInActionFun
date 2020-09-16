@@ -35,4 +35,4 @@ class Article {
 }
 
 module.exports = db;
-module.experts = Article;
+module.exports.Article = Article;
